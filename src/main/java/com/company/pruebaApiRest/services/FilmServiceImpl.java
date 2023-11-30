@@ -94,7 +94,7 @@ public class FilmServiceImpl implements IFilmService{
 		
 	try {	
 		
-		ApiResponseDto apiResults = starWarsApi.callPlanetApi(id+"");		
+		ApiResponseDto apiResults = starWarsApi.callApi(id+"");		
 
 	    if ( apiResults.getDetail() !=null ) {	    
 	    	response.setMetadata("Respuesta nok", "-1", "Film no encontrado");

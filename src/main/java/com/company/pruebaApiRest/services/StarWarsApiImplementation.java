@@ -13,9 +13,19 @@ import java.net.http.HttpResponse;
 
 @Component
 public class StarWarsApiImplementation implements IStarWarsApi {
+	
+	  private final HttpClient httpClient;
 
-  public ApiResponseDto callPlanetApi(String planetName) throws Exception {
-    return this.buildResponseBody(this.getApiResponse(planetName));
+	  public StarWarsApiImplementation() {
+	    httpClient = HttpClient.newBuilder().build();
+	  }
+
+	  public StarWarsApiImplementation(HttpClient httpClient) {
+	    this.httpClient = httpClient;
+	  }
+
+  public ApiResponseDto callApi(String idFilm) throws Exception {
+    return this.buildResponseBody(this.getApiResponse(idFilm));
   }
 
   private HttpRequest buildRequest(String filmId) {
@@ -24,10 +34,10 @@ public class StarWarsApiImplementation implements IStarWarsApi {
       .build();
   }
 
-  private String getApiResponse(String planetName) throws Exception {
-    return HttpClient.newBuilder().build()
-      .send(this.buildRequest(planetName), HttpResponse.BodyHandlers.ofString())
-      .body();
+  private String getApiResponse(String idFilm) throws Exception {
+	  return httpClient
+		      .send(this.buildRequest(idFilm), HttpResponse.BodyHandlers.ofString())
+		      .body();
   }
 
   private ApiResponseDto buildResponseBody(String apiResponseBody) throws JsonProcessingException {

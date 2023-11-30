@@ -3,7 +3,7 @@ package com.company.pruebaApiRest.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -63,7 +63,7 @@ public class FilmRestController {
 	 * @throws Exception 
 	 */
 	@GetMapping("/films/api/{id}")
-	public ResponseEntity<FilmResponseRest> searchFilmsApiById(@PathVariable Long id) throws Exception {
+	public ResponseEntity<FilmResponseRest> searchFilmsApiById(@PathVariable @NumberFormat Long id) throws Exception {
 		
 		
 		ResponseEntity<FilmResponseRest> response = service.searchApiById(id);
